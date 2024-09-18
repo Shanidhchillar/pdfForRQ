@@ -75,7 +75,7 @@ class Transaction(BaseModel):
     transactionTypeID: str
     transactionCreatedON: str
     status: str
-    clientReferenceid: str
+    clientReferenceid: Optional[str]
     transactionType: str
     transactionTypeStatus: str
 
@@ -90,6 +90,6 @@ class JSONData(BaseModel):
     user: User
     transactions: List[Transaction]
     consignment_details: List[ConsignmentDetails]
-    distributor: Optional[str]
-    sales_team: Optional[str]
-    current_year: int
+    # distributor: Optional[str]
+    # sales_team: Optional[str]
+    # current_year: int
