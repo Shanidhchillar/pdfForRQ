@@ -11,7 +11,7 @@ app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/read_pdf_RQ")
+@app.post("/read_pdf_RQ")
 async def read_pdf(request: Request, json_data: JSONData):
     # Load and encode image
     logo_base64 = image_to_base64("images/loginnew.png")
