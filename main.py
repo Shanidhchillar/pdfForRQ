@@ -41,8 +41,9 @@ async def read_pdf(request: Request, json_data: JSONData):
     ).body.decode()
 
     # Generate the PDF with headers and footers
-    header_path = os.path.join(os.path.dirname(__file__), "templates", "header.html")
-    footer_path = os.path.join(os.path.dirname(__file__), "templates", "footer.html")
+    header_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "templates", "header.html"))
+    footer_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "templates", "footer.html"))
+
 
     pdf = pdfkit.from_string(
         html_content, 
