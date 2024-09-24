@@ -63,8 +63,24 @@ async def read_pdf(request: Request, json_data: JSONData):
     #         "disable-smart-shrinking": "",
     #     }
     # )
-    simple_html = "<h1>Hello, PDF!</h1>"
-    pdf = pdfkit.from_string(simple_html, False)
+
+
+    # simple_html = "<h1>Hello, PDF!</h1>"
+    # pdf = pdfkit.from_string(simple_html, False)
+
+    pdf = pdfkit.from_string(
+        html_content,
+        False,
+        options={
+            "header-html": header_path,
+            "footer-html": footer_path,
+            "margin-top": "25mm",
+            "margin-bottom": "25mm",
+            "margin-left": "15mm",
+            "margin-right": "15mm",
+        }
+    )
+
 
     # Return the PDF as a streaming response
     return StreamingResponse(
