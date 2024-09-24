@@ -44,6 +44,9 @@ async def read_pdf(request: Request, json_data: JSONData):
     header_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "templates", "header.html"))
     footer_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "templates", "footer.html"))
 
+    print("Header path:", header_path)
+    print("Footer path:", footer_path)
+
 
     pdf = pdfkit.from_string(
         html_content, 
