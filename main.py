@@ -48,21 +48,23 @@ async def read_pdf(request: Request, json_data: JSONData):
     print("Footer path:", footer_path)
 
 
-    pdf = pdfkit.from_string(
-        html_content, 
-        False,
-        options={
-            "header-html": header_path,
-            "footer-html": footer_path,
-            "margin-top": "25mm",
-            "margin-bottom": "25mm",
-            "margin-left": "15mm",
-            "margin-right": "15mm",
-            "footer-spacing": "5",
-            "header-spacing": "5",
-            "disable-smart-shrinking": "",
-        }
-    )
+    # pdf = pdfkit.from_string(
+    #     html_content, 
+    #     False,
+    #     options={
+    #         "header-html": header_path,
+    #         "footer-html": footer_path,
+    #         "margin-top": "25mm",
+    #         "margin-bottom": "25mm",
+    #         "margin-left": "15mm",
+    #         "margin-right": "15mm",
+    #         "footer-spacing": "5",
+    #         "header-spacing": "5",
+    #         "disable-smart-shrinking": "",
+    #     }
+    # )
+    simple_html = "<h1>Hello, PDF!</h1>"
+    pdf = pdfkit.from_string(simple_html, False)
 
     # Return the PDF as a streaming response
     return StreamingResponse(
