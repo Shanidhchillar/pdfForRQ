@@ -10,79 +10,32 @@
             padding: 0;
         }
 
-        header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background-color: #752727;
-            color: white;
-            text-align: center;
-            line-height: 35px;
-        }
-
-        footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background-color: #752727;
-            color: white;
-            text-align: center;
-            line-height: 35px;
-        }
-
         main {
-            margin-top: 60px; /* Adjust based on header height */
-            margin-bottom: 60px; /* Adjust based on footer height */
+            margin-top: 60px; /* Space for header */
+            margin-bottom: 60px; /* Space for footer */
         }
 
-        .logo {
-            height: 80px;
-            width: 120px;
-        }
-
-        .company-info {
-            text-align: left;
-        }
-
-        .contact-info {
-            text-align: right;
-            vertical-align: top;
-        }
-        
-        td{
-        border-top:1px solid black;    
+        td {
+            border-top: 1px solid black;    
         }
 
         .horizontal-line {
-            /* border: none; */
             border-top: -1px solid #000;
             margin: 10px 0;
         }
     </style>
 </head>
 <body>
-    <header>
-        <!-- Header -->
-    </header>
-
-    <footer>
-        <!-- <img src="https://fronty.com/static/uploads/Converting_Image_to_HTML_CSS.jpg" alt="Logo" style="height: 80%; width: 10%;"> -->
-        <img src="data:image/png;base64,{{ base64_image }}" alt="Logo" style="height: 80%; width: 10%;">
-    </footer>
-
     <main>
+        <!-- Main content goes here, without the header and footer sections -->
         <br><br><br><br>
         <table style="width: 100%;">
             <tr>
-                <td class="company-info" style="width: 70%;border-top:none;">
+                <td class="company-info" style="width: 70%; border-top:none;">
                     <img src="data:image/png;base64,{{ base64_image }}" alt="Logo" class="logo">
                     <h5><b>RECHARGE QATAR W L L</b></h5>
                 </td>
-                <td class="contact-info" style="width: 30%;border-top:none;">
+                <td class="contact-info" style="width: 30%; border-top:none;">
                     Post Box: 9586<br>
                     Street No.2<br>
                     Industrial Area, Doha<br>
@@ -101,19 +54,19 @@
         </div><br>
         <table style="width: 100%">
             <tr>
-                <td style=" border-top:none;"><label style="font-size: 10px;">Date :</label><label style="font-size: 10px;">{{ fromdate }} to {{ todate }}</label></td>
+                <td style="border-top:none;"><label style="font-size: 10px;">Date :</label><label style="font-size: 10px;">{{ fromdate }} to {{ todate }}</label></td>
                 <td style="border-top: none;"><label style="font-size: 10px;">Opening balance :</label><label style="font-size: 10px;">{{ closing_balance }}</label></td>
             </tr>
             <tr>
-                <td style=" border-top:none;"><label style="font-size: 10px;">Closing balance :</label><label style="font-size: 10px;">{{ opening_balance }}</label></td>
+                <td style="border-top:none;"><label style="font-size: 10px;">Closing balance :</label><label style="font-size: 10px;">{{ opening_balance }}</label></td>
                 <td style="border-top: none;"><label style="font-size: 10px;">Merchant name :</label><label style="font-size: 10px;">{{ user.userName }}</label></td>
             </tr>
             <tr>
-                <td style=" border-top:none;"><label style="font-size: 10px;">Merchant Code :</label><label style="font-size: 10px;">{{ user.merchantCode }}</label></td>
+                <td style="border-top:none;"><label style="font-size: 10px;">Merchant Code :</label><label style="font-size: 10px;">{{ user.merchantCode }}</label></td>
                 <td style="border-top: none;"><label style="font-size: 10px;">Total Credit :</label><label style="font-size: 10px;">{{ total_credit_entries }}</label></td>
             </tr>
             <tr>
-                <td style=" border-top:none;"><label style="font-size: 10px;">Total Debit :</label><label style="font-size: 10px;">{{ total_debit_entries }}</label></td>
+                <td style="border-top:none;"><label style="font-size: 10px;">Total Debit :</label><label style="font-size: 10px;">{{ total_debit_entries }}</label></td>
                 <td style="border-top: none;"><label style="font-size: 10px;">Wallet Balance :</label><label style="font-size: 10px;">{{ balance }}</label></td>
             </tr>
         </table>
@@ -134,33 +87,6 @@
                 </thead>
                 <tbody>
                     {% for transaction in transactions %}
-                    <!-- <tr>
-                        <td>1</td>
-                        <td>01-01-2024 12:34</td>
-                        <td>TXN1234567890</td>
-                        <td>Payment Received</td>
-                        <td>-</td>
-                        <td>500.00</td>
-                        <td>1,500.00</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>02-01-2024 14:20</td>
-                        <td>TXN0987654321</td>
-                        <td>Payment Sent</td>
-                        <td>200.00</td>
-                        <td>-</td>
-                        <td>1,300.00</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>03-01-2024 10:00</td>
-                        <td>TXN1122334455</td>
-                        <td>Service Charge</td>
-                        <td>50.00</td>
-                        <td>-</td>
-                        <td>1,250.00</td>
-                    </tr> -->
                     <tr>
                         <td>{{ loop.index }}</td>
                         <td>{{ transaction.transactionCreatedOn }}</td>

@@ -70,7 +70,7 @@ class Transaction(BaseModel):
     transactionStatus: str
     transactionID: str
     transactionUID: str
-    senderID: str
+    senderID: Optional[str]
     receiverID: Optional[str]
     transactionTypeID: str
     transactionCreatedON: str
