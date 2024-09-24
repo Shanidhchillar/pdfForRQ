@@ -6,6 +6,7 @@ import io
 import json
 import base64
 from schemas.pdfschema import JSONData
+import os
 
 app = FastAPI()
 
@@ -40,19 +41,22 @@ async def read_pdf(request: Request, json_data: JSONData):
     ).body.decode()
 
     # Generate the PDF with headers and footers
+    header_path = os.path.join(os.path.dirname(__file__), "templates", "header.html")
+    footer_path = os.path.join(os.path.dirname(__file__), "templates", "footer.html")
+
     pdf = pdfkit.from_string(
         html_content, 
-        False,  # Get PDF as bytes
+        False,
         options={
-            "header-html": "templates/header.html",  # Path to the header HTML file
-            "footer-html": "templates/footer.html",  # Path to the footer HTML file
+            "header-html": header_path,
+            "footer-html": footer_path,
             "margin-top": "25mm",
             "margin-bottom": "25mm",
             "margin-left": "15mm",
             "margin-right": "15mm",
-            "footer-spacing": "5",  # Adjust footer spacing if necessary
-            "header-spacing": "5",  # Adjust header spacing if necessary
-            "disable-smart-shrinking": "",  # Ensure correct scaling
+            "footer-spacing": "5",
+            "header-spacing": "5",
+            "disable-smart-shrinking": "",
         }
     )
 
