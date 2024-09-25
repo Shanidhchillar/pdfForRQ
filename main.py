@@ -16,7 +16,6 @@ templates = Jinja2Templates(directory="templates")
 async def read_pdf(request: Request, json_data: JSONData):
     # Load and encode image
     logo_base64 = image_to_base64("images/loginnew.png")
-    print(logo_base64, "base 64 encoded image")
     
     # Access data from the Pydantic model
     opening_balance = json_data.transactions[0].currentBalance
@@ -49,20 +48,22 @@ async def read_pdf(request: Request, json_data: JSONData):
 
 
     pdf = pdfkit.from_string(
-        html_content, 
-        False,
-        options={
-            "header-html": header_path,
-            "footer-html": footer_path,
-            "margin-top": "25mm",
-            "margin-bottom": "25mm",
-            "margin-left": "15mm",
-            "margin-right": "15mm",
-            "footer-spacing": "5",
-            "header-spacing": "5",
-            "disable-smart-shrinking": "",
-        }
-    )
+    html_content, 
+    False,
+    options={
+        "header-html": "/root/recharge_qatar_pdf_generation/pdfForRQ/templates/header.html",
+        "footer-html": "/root/recharge_qatar_pdf_generation/pdfForRQ/templates/footer.html",
+        "margin-top": "25mm",
+        "margin-bottom": "25mm",
+        "margin-left": "15mm",
+        "margin-right": "15mm",
+        "footer-spacing": "5",
+        "header-spacing": "5",
+        "disable-smart-shrinking": "",
+        "debug-javascript": "",  # Enable javascript debugging
+    }
+)
+
 
 
     # simple_html = "<h1>Hello, PDF!</h1>"
