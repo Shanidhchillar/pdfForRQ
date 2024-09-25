@@ -112,7 +112,7 @@ async def read_pdf_RQ_2(request: Request, json_data: JSONData):
 
     # Render the HTML template
     html_content = templates.TemplateResponse(
-        "new2_backup.html", 
+        "demo_testing.html", 
         {
             "request": request, 
             **json_data.dict(),  # Convert Pydantic model to a dictionary

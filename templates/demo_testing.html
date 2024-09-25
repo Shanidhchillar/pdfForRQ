@@ -1,0 +1,152 @@
+<html></html>
+
+<head>
+    <style>
+        .footer {
+            /* position: absolute; */
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background-color: #752727;
+            color: white;
+            text-align: center;
+            line-height: 35px;
+        }
+        .header {
+            position: relative; /* Change from absolute to relative */
+            width: 100%; /* Ensure it stretches the full width */
+            height: 50px; /* Set the height of the header */
+            background-color: #752727; /* Background color */
+            color: white; /* Default text color */
+            text-align: center; /* Centered text */
+            line-height: 50px; /* Align text vertically in the center */
+        }
+        .header h2 {
+            color: #752727; /* Change font color to match the background */
+            margin: 0; /* Remove default margins */
+            line-height: 50px; /* Align text vertically in the center */
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+        }
+
+        main {
+            margin-top: 60px; /* Space for header */
+            margin-bottom: 60px; /* Space for footer */
+        }
+
+        td {
+            border-top: 1px solid black;    
+        }
+
+        .horizontal-line {
+            border-top: -1px solid #000;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <br><br><br><br>
+        <table style="width: 100%;">
+            <tr>
+                <td class="company-info" style="width: 70%; border-top:none;">
+                    <img src="data:image/png;base64,{{ base64_image_data }}" alt="Logo" class="logo" width="100" height="100"/>
+                    <h5><b>RECHARGE QATAR W L L</b></h5>
+                </td>
+                <td class="contact-info" style="width: 30%; border-top:none;">
+                    Post Box: 9586<br>
+                    Street No.2<br>
+                    Industrial Area, Doha<br>
+                    +974 44114455
+                </td>
+            </tr>
+        </table>
+        <br>
+
+        <hr class="horizontal-line">
+        <hr class="horizontal-line">
+        <br>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <u><h3>STATEMENT - {{ user.userName }}</h3></u>
+        </div><br>
+        <table style="width: 100%">
+            <tr>
+                <td style="border-top:none;"><label style="font-size: 10px;">Date :</label><label style="font-size: 10px;">{{ fromdate }} to {{ todate }}</label></td>
+                <td style="border-top: none;"><label style="font-size: 10px;">Opening balance :</label><label style="font-size: 10px;">{{ closing_balance }}</label></td>
+            </tr>
+            <tr>
+                <td style="border-top:none;"><label style="font-size: 10px;">Closing balance :</label><label style="font-size: 10px;">{{ opening_balance }}</label></td>
+                <td style="border-top: none;"><label style="font-size: 10px;">Merchant name :</label><label style="font-size: 10px;">{{ user.userName }}</label></td>
+            </tr>
+            <tr>
+                <td style="border-top:none;"><label style="font-size: 10px;">Merchant Code :</label><label style="font-size: 10px;">{{ user.merchantCode }}</label></td>
+                <td style="border-top: none;"><label style="font-size: 10px;">Total Credit :</label><label style="font-size: 10px;">{{ total_credit_entries }}</label></td>
+            </tr>
+            <tr>
+                <td style="border-top:none;"><label style="font-size: 10px;">Total Debit :</label><label style="font-size: 10px;">{{ total_debit_entries }}</label></td>
+                <td style="border-top: none;"><label style="font-size: 10px;">Wallet Balance :</label><label style="font-size: 10px;">{{ balance }}</label></td>
+            </tr>
+        </table>
+        <br><br>
+
+        {% if transactions %}
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #000;">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>TXN Date & Time</th>
+                        <th>Transaction ID</th>
+                        <th>Description</th>
+                        <th>Debits</th>
+                        <th>Credits</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ transaction.transactionCreatedOn }}</td>
+                        <td>{{ transaction.transactionUID }}</td>
+                        <td>{{ transaction.note }}</td>
+                        <td>
+                            {% if transaction.debitOrCredit == '2' %}
+                                {{ transaction.amount }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if transaction.debitOrCredit == '1' %}
+                                {{ transaction.amount }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% set balance = transaction.currentBalance | float %}
+                            {% if balance < 0 %}
+                                <span style="color:red">{{ balance | round(2) }}</span>
+                            {% else %}
+                                {{ balance | round(2) }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h5 class="text-center">No Transactions found.</h5>
+        {% endif %}
+    </main>
+
+    <div class="footer"></div>
+        <img src="http://139.59.11.49/rechargeqatar/assets/images/brand/loginnew.png" alt="Logo" style="height: 80%; width: 10%;">
+    </div>
+</body>
+</html>
