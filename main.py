@@ -51,8 +51,8 @@ async def read_pdf(request: Request, json_data: JSONData):
     html_content, 
     False,
     options={
-        "header-html": "/root/recharge_qatar_pdf_generation/pdfForRQ/templates/header.html",
-        "footer-html": "/root/recharge_qatar_pdf_generation/pdfForRQ/templates/footer.html",
+        "header-html": "templates/header.html",
+        # "footer-html": "templates/footer.html",
         "margin-top": "25mm",
         "margin-bottom": "25mm",
         "margin-left": "15mm",
