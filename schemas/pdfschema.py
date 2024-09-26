@@ -52,7 +52,9 @@ class User(BaseModel):
     userStatus: Optional[Union[str, int]]
     SPID: Optional[Union[str, int]]
     loginEmail: Optional[Union[str, int]]
-    isSubuserType: Optional[Union[str, int]]
+    isSubuserType: Optional[Union[str, int]] = None
+
+
 
 class Transaction(BaseModel):
     ledgerID: Optional[Union[str, int]]
